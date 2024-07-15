@@ -9,6 +9,9 @@ const nav = document.querySelector(".nav"),
     navList = nav.querySelectorAll("li"),
     totalNavList = navList.length;
 
+const navToggler = document.querySelector(".nav-toggler");
+const asideMobile = document.querySelector(".assideMobile");
+
 for (let i = 0; i < totalNavList; i++) {
     const a = navList[i].querySelector("a");
     a.addEventListener("click", function (event) {
@@ -19,6 +22,12 @@ for (let i = 0; i < totalNavList; i++) {
         }
         this.classList.add("active")
         showSection(this);
+
+        const targetId = this.getAttribute("href").substring(1);
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth' });
+        }
     });
 }
 
@@ -34,6 +43,8 @@ function showSection(element) {
         targetSection.classList.add("active");
     };
 }
+
+
 
 const hireMeBtn = document.querySelector(".btn.hire-me");
 hireMeBtn.addEventListener("click", function (event) {
@@ -59,8 +70,15 @@ hireMeBtn.addEventListener("click", function (event) {
 document.addEventListener('DOMContentLoaded', function () {
     const navToggler = document.querySelector('.nav-toggler');
     const aside = document.querySelector('.aside');
+    const menuItems = document.querySelectorAll(".aside ul li");
 
     navToggler.addEventListener('click', function () {
         aside.classList.toggle('active');
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', function () {
+                aside.classList.remove('active');
+            })
+        })
     });
 });
