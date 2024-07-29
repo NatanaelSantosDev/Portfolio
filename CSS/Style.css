@@ -848,7 +848,7 @@ h3.my-profession {
     }
 
     .row {
-        flex-direction: column;
+        flex-direction: column-reverse;
     }
 
     .section-title {
